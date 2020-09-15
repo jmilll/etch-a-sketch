@@ -1,0 +1,34 @@
+body {
+    font-family: arial, sans-serif;
+    color:rgb(34, 34, 34);
+    display:block;
+    font-family:arial, sans-serif;
+    font-size:13px;
+    height:836px;
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    margin-top:0px;
+    min-height:100%;
+    min-width:980px;
+    position:absolute;
+    top:0px;
+    width:100%;
+    height: 100%;
+}
+
+/* ---------------------START LINK STYLES ------------------*/
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+a:link {
+    color: inherit;
+}
+
+
+/* ---------------------BUTTON STYLES ------------------*/
