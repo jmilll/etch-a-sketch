@@ -11,13 +11,34 @@
 
 <body> 
     
-    
-
-
+    <div id="container">
+        <div id="header"></div>
+        <div id="grid"></div>
+    </div>
 
 
 <script>
+    const container = document.getElementById('container');
+    const grid = document.getElementById('grid');
 
+
+    
+
+    function createGrid(num) {
+
+        for (let row = 0; row < num; row++) {
+             for (let column = 0; column < num; column++) {
+                const addCell = document.createElement('div');
+                addCell.setAttribute('class', 'cell');
+                grid.appendChild(addCell);
+            }
+        }
+    }
+
+
+    
+
+    window.addEventListener('load', createGrid(16));
 
 </script> 
 </body>
