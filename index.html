@@ -25,13 +25,14 @@
 
     
 
-    /* THIS IS SAVED
+    
     let userInput = parseInt(prompt('Please enter a number 1 through 100'));
     window.addEventListener('load', createGrid(userInput));
     root.style.setProperty('--grid-size', userInput );
-    */
-    window.addEventListener('load', createGrid(2)); //TEMP to not enter number every load
-    root.style.setProperty('--grid-size', 2 ); //TEMP to not enter number every load
+    
+    /* --------- FOR TESTING WITHOUT INPUTING A NUMBER ---------- */
+    //window.addEventListener('load', createGrid(4)); //TEMP to not enter number every load
+    //root.style.setProperty('--grid-size', 4 ); //TEMP to not enter number every load
 
     function createGrid(num) {
         for (let row = 0; row < num; row++) {
@@ -41,23 +42,20 @@
                 grid.appendChild(addCell);
             }
         }
+        document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('mouseover', draw));
     }
 
     let cell = document.querySelector('#grid .cell');
 
     function draw() {
-        cell.style.backgroundColor = 'rgb(151, 69, 69)'; 
-        
-        console.log(cell);
+        this.style.backgroundColor = 'rgb(151, 69, 69)';
+        //this.style.cssText = 'background-color: pink';
+        //console.log('boom');
 
     }
 
-    function draw2() {
 
-        cell.style.cssText = 'background-color: pink';
-
-    }
-    grid.addEventListener('mouseover', draw2);
+    cell.addEventListener('mouseover', draw);
 
 //this.container.style.cssText =`grid-template-columns: repeat(${this.size}, 1fr); grid-template-rows: repeat(${this.size}, 1fr);`;
 //$(':root').css('--main-color', '#000000');
