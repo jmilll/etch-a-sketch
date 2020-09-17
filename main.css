@@ -17,6 +17,13 @@
     height: 100%;
 }  */
 
+/* root is custom variables that can be called in the css with var(--custom-variable); */
+:root {
+    --grid-size: 10;
+    --grid-width-height: 500px;
+
+}
+
 #container {
     border: gray 1px dashed;
     width:100%;
@@ -27,17 +34,20 @@
 
 #grid {
     margin: 10%;
-    width: 500px;
-    height: 500px;
+    width: var(--grid-width-height);
+    height: var(--grid-width-height);
     border: green 1px dashed;
+    grid-template-rows: repeat(var(--grid-size), 1fr);
+    grid-template-columns: repeat(var(--grid-size), 1fr);
 }
 
 .cell {
-    width: 50px;
-    height: 50px;
     float: left;
-    border: blue 1px solid;
-    background-color: pink;
+    width: calc(var(--grid-width-height) / var(--grid-size));
+    height: calc(var(--grid-width-height) / var(--grid-size));
+    box-sizing: border-box;
+    border: rgb(255, 255, 255) 1px solid;
+    background-color: rgb(245, 245, 245);
 }
 
 /* ---------------------START HOVER STYLES ------------------*/
