@@ -20,17 +20,18 @@
 <script>
     const container = document.getElementById('container');
     const grid = document.getElementById('grid');
-    const cell = document.querySelector('.cell');
     const gridSize = document.getElementsByName('--grid-size');
     let root = document.documentElement;
 
     
 
-
+    /* THIS IS SAVED
     let userInput = parseInt(prompt('Please enter a number 1 through 100'));
     window.addEventListener('load', createGrid(userInput));
-    
     root.style.setProperty('--grid-size', userInput );
+    */
+    window.addEventListener('load', createGrid(2)); //TEMP to not enter number every load
+    root.style.setProperty('--grid-size', 2 ); //TEMP to not enter number every load
 
     function createGrid(num) {
         for (let row = 0; row < num; row++) {
@@ -42,7 +43,21 @@
         }
     }
 
+    let cell = document.querySelector('#grid .cell');
 
+    function draw() {
+        cell.style.backgroundColor = 'rgb(151, 69, 69)'; 
+        
+        console.log(cell);
+
+    }
+
+    function draw2() {
+
+        cell.style.cssText = 'background-color: pink';
+
+    }
+    grid.addEventListener('mouseover', draw2);
 
 //this.container.style.cssText =`grid-template-columns: repeat(${this.size}, 1fr); grid-template-rows: repeat(${this.size}, 1fr);`;
 //$(':root').css('--main-color', '#000000');

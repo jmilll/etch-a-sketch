@@ -21,7 +21,7 @@
 :root {
     --grid-size: 10;
     --grid-width-height: 500px;
-
+    --hover-color: black;
 }
 
 #container {
@@ -46,11 +46,21 @@
     width: calc(var(--grid-width-height) / var(--grid-size));
     height: calc(var(--grid-width-height) / var(--grid-size));
     box-sizing: border-box;
-    border: rgb(255, 255, 255) 1px solid;
-    background-color: rgb(245, 245, 245);
+    border: rgb(245, 245, 245) 1px solid;
+    background-color: rgb(255, 255, 255);
 }
-
+.cell.hover {
+    background-color: pink;
+}
+.test {
+    background-color: pink;
+}
 /* ---------------------START HOVER STYLES ------------------*/
+/*
+.cell:hover {
+    background-color: var(--hover-color);
+}
+*/
 
 a {
     color: inherit;
