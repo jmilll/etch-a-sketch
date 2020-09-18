@@ -12,27 +12,56 @@
 <body> 
     
     <div id="container">
-        <div id="header"></div>
+        <div id="header">
+            <span class="stepper">
+                <input type="number" id="input-number" value="4" min="2" max="75" step="2">
+                <button id="go">GO</button>
+            </span>
+            <button id="clear">Clear</button>
+        </div>
         <div id="grid"></div>
     </div>
 
 
 <script>
+    /* --------- COLOR GLOBAL ---------- */
+    const defaultGridColor = 'rgb(255, 255, 255)';
+    const colorBlack = '#000';
+    let cellColor = 'rgb(0, 150, 177)';
+
+    /* --------- GRID CREATION GLOBAL ---------- */
     const container = document.getElementById('container');
     const grid = document.getElementById('grid');
     const gridSize = document.getElementsByName('--grid-size');
     let root = document.documentElement;
+    
+    /* --------- HEADER GLOBAL ---------- */
+    const goButton = document.getElementById('go');
+    const clearButton = document.getElementById('clear');
+    let gridInputValue = parseInt(document.getElementById('input-number').value);
+   
 
-    
 
-    
-    let userInput = parseInt(prompt('Please enter a number 1 through 100'));
-    window.addEventListener('load', createGrid(userInput));
-    root.style.setProperty('--grid-size', userInput );
-    
+    /* --------- NUMBER SPINNER ---------- */
+  
+    /* --------- FOR INPUTING ANY NUMBER ---------- */
+    // let userInput = parseInt(prompt('Please enter a number 1 through 100'));
+    // window.addEventListener('load', createGrid(userInput));
+    // root.style.setProperty('--grid-size', userInput );
+
     /* --------- FOR TESTING WITHOUT INPUTING A NUMBER ---------- */
     //window.addEventListener('load', createGrid(4)); //TEMP to not enter number every load
     //root.style.setProperty('--grid-size', 4 ); //TEMP to not enter number every load
+    
+    /* --------- FOR TESTING NEW INPUT TYPES ---------- */
+    let userInput = gridInputValue;
+    window.addEventListener('load', createGrid(userInput));
+    root.style.setProperty('--grid-size', userInput);
+
+    function setNumber(x) {
+        let newNum = root.style.setProperty('--grid-size', x);
+        return newNum;
+    }
 
     function createGrid(num) {
         for (let row = 0; row < num; row++) {
@@ -45,17 +74,45 @@
         document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('mouseover', draw));
     }
 
+    function updateGrid(b) {
+        removeAllChildNodes(grid)
+        setNumber(b);
+        createGrid(b);
+    }
+
+    /* --------- DELETE THE GRID TO START FRESH ---------- */
+    function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    } //removeAllChildNodes(grid);
+
+
+
     let cell = document.querySelector('#grid .cell');
 
     function draw() {
-        this.style.backgroundColor = 'rgb(151, 69, 69)';
+        this.style.backgroundColor = cellColor;
         //this.style.cssText = 'background-color: pink';
         //console.log('boom');
 
     }
 
 
+
+    function resetColor() {
+        document.querySelectorAll('.cell').forEach(cell => cell.style.backgroundColor = defaultGridColor);
+    }
+   
+
+
+   
+
     cell.addEventListener('mouseover', draw);
+    clearButton.addEventListener('click', resetColor);
+    //goButton.addEventListener('click', updateGrid(gridInputValue));
+    //goButton.addEventListener('click', () => {  grid.size = sizeElem.value; grid.gridInit();});
+
 
 //this.container.style.cssText =`grid-template-columns: repeat(${this.size}, 1fr); grid-template-rows: repeat(${this.size}, 1fr);`;
 //$(':root').css('--main-color', '#000000');
@@ -63,6 +120,25 @@
 //element.setAttribute('style', '--grid-size: ;')
 //element.style.backgroundColor = "red";
 //cell.style.setProperty(`--grid-size: ${num};`)
+
+    /* --------- AVOID CREATING THE # SELECTION OPTIONS IN HTML 1 BY 1 ---------- 
+    HTML == <select class="form-control" id="rows" name="rows"></select>
+
+    const select = document.querySelector('#header .form-control')
+    window.addEventListener('load', createOptions);
+    
+    function createOptions() {
+        let i = 1;
+        do {
+            const addOption = document.createElement('option');
+            addOption.textContent = i;
+            addOption.setAttribute('value', i);
+            select.appendChild(addOption);
+            i++;
+        } 
+        while(i <= 20); //Changes the amount of options
+    }
+    */
 </script> 
 </body>
 
