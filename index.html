@@ -13,11 +13,13 @@
     
     <div id="container">
         <div id="header">
-            <span class="stepper">
-                <input type="number" id="input-number" value="7" min="2" max="75" step="2">
-                <button id="go">GO</button>
+            <span class="number-selection">
+                <input type="number" id="input-number" value="12" min="2" max="75" step="2">
+                <button class="button" id="go">GO</button>
             </span>
-            <button id="clear">Clear</button>
+            <button class="button" id="clear">Clear</button>
+            <button class="button" id="default-color">Normal Color</button>
+            <button class="button rainbow-2" id="random-color">Random Color</button>
         </div>
         <div id="grid"></div>
     </div>
@@ -26,8 +28,20 @@
 <script>
     /* --------- COLOR GLOBAL ---------- */
     const defaultGridColor = 'rgb(255, 255, 255)';
-    const colorBlack = '#000';
-    let cellColor = 'rgb(0, 150, 177)';
+    const colorBlack = 'rgb(35, 35, 35)';
+    let defaultCellColor = 'rgb(50, 50, 50)'; //'rgb(0, 150, 177)'
+    // to get a one time random color
+    // let r = Math.floor(Math.random()*255);
+    // let g = Math.floor(Math.random()*255);
+    // let b = Math.floor(Math.random()*255);
+    // let randomCellColor = `rgb(${r}, ${g}, ${b})`;
+    function randomCellColor() {
+        let r = Math.floor(Math.random()*255);
+        let g = Math.floor(Math.random()*255);
+        let b = Math.floor(Math.random()*255);
+        let rc = `rgb(${r}, ${g}, ${b})`;
+        return rc;
+    }
 
     /* --------- GRID CREATION GLOBAL ---------- */
     const container = document.getElementById('container');
@@ -35,11 +49,14 @@
     const gridSize = document.getElementsByName('--grid-size');
     let root = document.documentElement;
     
+
     /* --------- HEADER GLOBAL ---------- */
     const goButton = document.getElementById('go');
     const clearButton = document.getElementById('clear');
     let gridInputValue = parseInt(document.getElementById('input-number').value);
-   
+    const randomColorButton = document.getElementById('random-color');
+    const defaultColorButton = document.getElementById('default-color');
+    let setRandomDraw = 'false';
 
 
 
@@ -55,9 +72,8 @@
     //root.style.setProperty('--grid-size', 4 ); //TEMP to not enter number every load
     
     /* --------- FOR TESTING NEW INPUT TYPES ---------- */
-    let userInput = gridInputValue;
-    window.addEventListener('load', createGrid(userInput));
-    root.style.setProperty('--grid-size', userInput);
+    window.addEventListener('load', createGrid(gridInputValue));
+    root.style.setProperty('--grid-size', gridInputValue);
 
     function setNumber(x) {
         let newNum = root.style.setProperty('--grid-size', x);
@@ -72,10 +88,9 @@
                 grid.appendChild(addCell);
             }
         }
-        document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('mouseover', draw));
+        document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('pointerover', draw));
     }
     
-
     function updateGrid(b) {
         removeAllChildNodes(grid)
         setNumber(b);
@@ -93,39 +108,41 @@
         //return x;
         updateGrid(x);
     }
+    
     /* --------- DELETE THE GRID TO START FRESH ---------- */
     function removeAllChildNodes(parent) {
         while (parent.firstChild) {
             parent.removeChild(parent.firstChild);
-        }
-    } //removeAllChildNodes(grid);
+        }//removeAllChildNodes(grid);
+    } 
 
-
-
+    // Located after grid creation -- otherwise, there would be no .cell to target
     let cell = document.querySelector('#grid .cell');
 
+    // function draw() {
+    //     this.style.backgroundColor = defaultCellColor;
+    // }
+    // function drawRandom() {
+    //     this.style.backgroundColor = randomCellColor;
+    // }
+
     function draw() {
-        this.style.backgroundColor = cellColor;
-        //this.style.cssText = 'background-color: pink';
-        //console.log('boom');
-
+        if (setRandomDraw === 'false') {
+            this.style.backgroundColor = defaultCellColor;
+        } else {
+            this.style.backgroundColor = randomCellColor();
+        }
     }
-
-
 
     function resetColor() {
         document.querySelectorAll('.cell').forEach(cell => cell.style.backgroundColor = defaultGridColor);
     }
-   
-
-
-   
-
-    cell.addEventListener('mouseover', draw);
+    
+    randomColorButton.addEventListener('click', () => {setRandomDraw = 'true'});
+    defaultColorButton.addEventListener('click', () => {setRandomDraw = 'false'});
+    cell.addEventListener('pointerover', draw);
     clearButton.addEventListener('click', resetColor);
     goButton.addEventListener('click', newInputValue);
-    //goButton.addEventListener('click', updateGrid(gridInputValue));
-    //goButton.addEventListener('click', () => {  grid.size = sizeElem.value; grid.gridInit();});
 
 
 //this.container.style.cssText =`grid-template-columns: repeat(${this.size}, 1fr); grid-template-rows: repeat(${this.size}, 1fr);`;
@@ -135,7 +152,7 @@
 //element.style.backgroundColor = "red";
 //cell.style.setProperty(`--grid-size: ${num};`)
 
-    /* --------- AVOID CREATING THE # SELECTION OPTIONS IN HTML 1 BY 1 ---------- 
+    /* --------- AVOID CREATING THE NUMBER SELECTION DROPDOWN OPTIONS IN HTML 1 BY 1 ---------- 
     HTML == <select class="form-control" id="rows" name="rows"></select>
 
     const select = document.querySelector('#header .form-control')
