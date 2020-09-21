@@ -14,7 +14,7 @@
     <div id="container">
         <div id="header">
             <span class="stepper">
-                <input type="number" id="input-number" value="4" min="2" max="75" step="2">
+                <input type="number" id="input-number" value="7" min="2" max="75" step="2">
                 <button id="go">GO</button>
             </span>
             <button id="clear">Clear</button>
@@ -42,7 +42,8 @@
    
 
 
-    /* --------- NUMBER SPINNER ---------- */
+
+
   
     /* --------- FOR INPUTING ANY NUMBER ---------- */
     // let userInput = parseInt(prompt('Please enter a number 1 through 100'));
@@ -73,13 +74,25 @@
         }
         document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('mouseover', draw));
     }
+    
 
     function updateGrid(b) {
         removeAllChildNodes(grid)
         setNumber(b);
         createGrid(b);
     }
-
+    
+    function newInputValue() {
+        var x = parseInt(document.getElementById('input-number').value);
+        var defaultVal = x.defaultValue;
+        var currentVal = x.value;
+        
+        if (defaultVal !== currentVal) {
+            x = currentVal;
+        } 
+        //return x;
+        updateGrid(x);
+    }
     /* --------- DELETE THE GRID TO START FRESH ---------- */
     function removeAllChildNodes(parent) {
         while (parent.firstChild) {
@@ -110,6 +123,7 @@
 
     cell.addEventListener('mouseover', draw);
     clearButton.addEventListener('click', resetColor);
+    goButton.addEventListener('click', newInputValue);
     //goButton.addEventListener('click', updateGrid(gridInputValue));
     //goButton.addEventListener('click', () => {  grid.size = sizeElem.value; grid.gridInit();});
 

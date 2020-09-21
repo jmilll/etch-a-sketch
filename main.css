@@ -37,7 +37,7 @@
     margin: 10%;
     width: var(--grid-width-height);
     height: var(--grid-width-height);
-    /* border: green 1px dashed; */
+    border: rgb(230, 230, 230) 3px solid;
     grid-template-rows: repeat(var(--grid-size), 1fr);
     grid-template-columns: repeat(var(--grid-size), 1fr);
 }
