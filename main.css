@@ -31,15 +31,32 @@
     height: 100%;
     margin: 0;
     min-width:550px;
+    display: grid;
+    grid-template-columns: 1fr minmax(500px, 1fr) 1fr;
+    grid-template-rows: 1fr 10fr 1fr;
+}
+
+#header {
+    display: grid;
+    grid-column: 2 / span 1;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    grid-gap: 10px;
+}
+
+span {
+    background-color: pink;
 }
 
 #grid {
-    margin: 10%;
+    margin: 20px;
     width: var(--grid-width-height);
     height: var(--grid-width-height);
     border: rgb(230, 230, 230) 3px solid;
     grid-template-rows: repeat(var(--grid-size), 1fr);
     grid-template-columns: repeat(var(--grid-size), 1fr);
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+    justify-self: center;
 }
 
 .cell {
@@ -66,7 +83,7 @@ button {
 /* ---------------------NUMBER SPINNER ------------------*/
 button:hover {
     background-color: darkgreen;
-    color: white;
+    color: pink;
 }
 
 .button{

@@ -20,6 +20,7 @@
             <button class="button" id="clear">Clear</button>
             <button class="button" id="default-color">Normal Color</button>
             <button class="button rainbow-2" id="random-color">Random Color</button>
+            <button class="button" id="eraser-color">Eraser</button>
         </div>
         <div id="grid"></div>
     </div>
@@ -57,7 +58,7 @@
     const randomColorButton = document.getElementById('random-color');
     const defaultColorButton = document.getElementById('default-color');
     let setRandomDraw = 'false';
-
+    const eraserColorButton = document.getElementById('eraser-color');
 
 
 
@@ -129,15 +130,17 @@
     function draw() {
         if (setRandomDraw === 'false') {
             this.style.backgroundColor = defaultCellColor;
-        } else {
+        } else if (setRandomDraw === 'true') {
             this.style.backgroundColor = randomCellColor();
+        } else {
+            this.style.backgroundColor = defaultGridColor;
         }
     }
 
     function resetColor() {
         document.querySelectorAll('.cell').forEach(cell => cell.style.backgroundColor = defaultGridColor);
     }
-    
+    eraserColorButton.addEventListener('click', () => {setRandomDraw = 'erase'});
     randomColorButton.addEventListener('click', () => {setRandomDraw = 'true'});
     defaultColorButton.addEventListener('click', () => {setRandomDraw = 'false'});
     cell.addEventListener('pointerover', draw);
