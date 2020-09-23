@@ -5,37 +5,36 @@
     <title>Etch A Sketch</title>
     <meta name="description" content="Etch A Sketch">
     <meta name="author" content="SitePoint">
-  
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400&display=swap" rel="stylesheet">
 </head>
 
 <body> 
     
     <div id="container">
-        <div id="header">
-            <div id="logo">
-                <h1>Etch-a-sketch</h1>
+        <div id="wrap"></div>
+            <div id="header">
+                <div id="logo">
+                    <h1>Etch-a-sketch</h1>
+                </div>
+                <span class="number-selection">
+                    <button class="btn" id="go">New #</button>
+                    <input type="number" id="input-number" value="12" min="2" max="75" step="2">  
+                    
+                </span>
             </div>
-            <span class="number-selection">
-                <button class="button" id="go">#</button>
-                <input type="number" id="input-number" value="12" min="2" max="75" step="2">  
-            </span>
-
-        </div>
-        <div id="grid"></div>
-        <div id="footer">
-            <button class="button" id="clear">Clear All</button>
-            <button class="button" id="default-color">Normal Color</button>
-            <button class="button rainbow-2" id="random-color">Random Color</button>
-            <button class="button" id="eraser-color">Eraser</button>
+            <div id="grid"></div>
+            <div id="footer">
+                <button class="button" id="clear">Clear All</button>
+                <button class="button act" id="default-color">Normal Color</button>
+                <button class="button rainbow-2 act" id="random-color">Random Color</button>
+                <button class="button act" id="eraser-color">Eraser</button>
+            </div>
         </div>
     </div>
 
-
 <script src="script.js"></script> 
 </body>
-
 </html>
