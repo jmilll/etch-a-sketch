@@ -88,7 +88,6 @@ span {
 }
 
 #go:hover {
-    /*background-color: rgb(49, 49, 49);*/
     transform: scale(1.05);
 }
 
@@ -153,9 +152,10 @@ button {
     font-weight: 300;
 }
 
-button:hover {
+.button:hover {
     background-color: var(--border-color);
     color: var(--default-background-color);
+    transition: all .3s ease;
 }
 
 .button:active {

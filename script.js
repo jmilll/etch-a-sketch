@@ -88,8 +88,9 @@
 
     function resetColor() {
         document.querySelectorAll('.cell').forEach(cell => cell.style.backgroundColor = defaultGridColor);
+        setRandomDraw = 'false';
     }
-    
+
     eraserColorButton.addEventListener('click', () => {setRandomDraw = 'erase'});
     randomColorButton.addEventListener('click', () => {setRandomDraw = 'true'});
     defaultColorButton.addEventListener('click', () => {setRandomDraw = 'false'});
